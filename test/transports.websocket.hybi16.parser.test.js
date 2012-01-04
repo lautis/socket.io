@@ -4,6 +4,7 @@
 
 var assert = require('assert');
 var Parser = require('../lib/transports/websocket/hybi-16.js').Parser;
+var Unicode = require('../lib/util.js').Unicode;
 require('./hybi-common');
 
 /**
@@ -23,6 +24,22 @@ module.exports = {
 
     p.add(getBufferFromHexString(packet));
     assert.ok(gotData);
+  },
+  'can parse unmasked text message with characters outside BMP': function() {
+    var status = Unicode.surrogatePairs;
+    Unicode.surrogatePairs = true;
+    var p = new Parser();
+    var packet = '81 04 f0 9d 9b a2';
+
+    var gotData = false;
+    p.on('data', function(data) {
+      gotData = true;
+      assert.equal('\ud835\udee2', data);
+    });
+
+    p.add(getBufferFromHexString(packet));
+    assert.ok(gotData);
+    Unicode.surrogatePairs = status;
   },
   'can parse close message': function() {
     var p = new Parser();
