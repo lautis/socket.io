@@ -61,7 +61,7 @@ module.exports = {
     var gotData = false;
     p.on('data', function(data) {
       gotData = true;
-      assert.equal(1, data.length); // Parsed as replacement character
+      assert.equal(2, data.length);
     });
 
     p.add(getBufferFromHexString(packet));
