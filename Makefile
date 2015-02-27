@@ -2,6 +2,7 @@
 ALL_TESTS = $(shell find test/ -name '*.test.js')
 ALL_BENCH = $(shell find benchmarks -name '*.bench.js')
 
+run-tests: export NODE_TLS_REJECT_UNAUTHORIZED=0
 run-tests:
 	@./node_modules/.bin/expresso \
 		-t 3000 \
