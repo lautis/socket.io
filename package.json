@@ -18,7 +18,7 @@
   , "dependencies": {
         "socket.io-client": "0.9.10"
       , "policyfile": "0.0.4"
-      , "wtf8": "0.1.1"
+      , "wtf8": "0.2.0"
       , "redis": "0.7.2"
     }
   , "devDependencies": {
