@@ -102,24 +102,5 @@ module.exports = {
         done();
       });
     });
-  },
-
-  'test listening with no arguments listens on 80': function (done) {
-    try {
-      var io = sio.listen()
-        , cl = client(80);
-
-      cl.get('/socket.io', function (res) {
-        res.statusCode.should.eql(200);
-
-        cl.end();
-        io.server.close();
-        done();
-      });
-      done();
-    } catch (e) {
-      e.should.match(/EACCES/);
-      done();
-    }
   }
 };
